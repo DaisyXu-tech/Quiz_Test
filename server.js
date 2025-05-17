@@ -11,16 +11,27 @@ const app = express();
 const PORT = 3000;
 
 const db = new Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false // required for Render-hosted PostgreSQL
+  }
 });
 
+db.connect()
+  .then(() => console.log('Connected to PostgreSQL'))
+  .catch((err) => console.error('Connection error:', err));
 
 
-db.connect();
+db.query(`
+  CREATE TABLE IF NOT EXISTS quiz_scores (
+    id SERIAL PRIMARY KEY,
+    averagescore JSON NOT NULL,
+    overallscore NUMERIC NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+`).then(() => console.log('Table created')).catch(console.error);
+
+
 
 
 // Middleware to parse JSON bodies
@@ -28,6 +39,13 @@ app.use(bodyParser.json());
 
 // Serve static files (CSS, JS, images) from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+// Redirect root URL to /quiz
+app.get('/', (req, res) => {
+  res.redirect('/quiz');
+});
+
 
 // Serve quiz.html when user visits '/quiz'
 app.get('/quiz', (req, res) => {
