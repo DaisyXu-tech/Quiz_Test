@@ -1,0 +1,26 @@
+[
+  {
+    "averageScores": {
+      "Talking-Support": 4.25,
+      "Providing Hands-On Care": 4.25,
+      "Experiential Knowledge": 3.4,
+      "Factual Knowledge": 2.4285714285714284,
+      "Community Knowledge": 3.4,
+      "Community Support": 4.25
+    },
+    "overallScore": 3.663095238095238,
+    "timestamp": "2025-04-26T00:03:34.438Z"
+  },
+  {
+    "averageScores": {
+      "Talking-Support": 4.5,
+      "Providing Hands-On Care": 4.5,
+      "Experiential Knowledge": 3.6,
+      "Factual Knowledge": 2.5714285714285716,
+      "Community Knowledge": 3.6,
+      "Community Support": 4.5
+    },
+    "overallScore": 3.8785714285714286,
+    "timestamp": "2025-04-26T00:15:19.700Z"
+  }
+]
